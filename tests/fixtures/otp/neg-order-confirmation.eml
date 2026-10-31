@@ -1,0 +1,15 @@
+From: Shop <orders@shop.example>
+To: user@example.org
+Subject: Your order has shipped
+Date: Sun, 1 Nov 2026 10:00:00 +0000
+Message-ID: <neg-order-confirmation@fixtures.postmoth>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Thanks for your order!
+
+Order number: 58213904
+Tracking: 1Z999AA10123456784
+Total: $129.99
+
+Questions? Call us at 1-800-555-0199.

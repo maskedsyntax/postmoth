@@ -1,0 +1,10 @@
+From: Clinic <reminders@clinic.example>
+To: user@example.org
+Subject: Appointment reminder
+Date: Sun, 1 Nov 2026 10:00:00 +0000
+Message-ID: <neg-dates-phones@fixtures.postmoth>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Your appointment on 12/05/2026 at 10:30 is confirmed.
+Call (555) 1234567 or +1 5551234567 to reschedule.

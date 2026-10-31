@@ -1,0 +1,9 @@
+From: Example <no-reply@accounts.example.com>
+To: user@example.org
+Subject: Reset your password
+Date: Sun, 1 Nov 2026 10:00:00 +0000
+Message-ID: <neg-reset-link@fixtures.postmoth>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Click to verify: https://accounts.example.com/verify?token=482913&u=99

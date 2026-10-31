@@ -1,0 +1,9 @@
+From: Example <no-reply@accounts.example.com>
+To: user@example.org
+Subject: Confirm it's you
+Date: Sun, 1 Nov 2026 10:00:00 +0000
+Message-ID: <pos-html-table@fixtures.postmoth>
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<html><head><style>.x{color:red}</style></head><body><table width="600"><tr><td><img src="https://cdn.example.com/logo.png" alt="Example"></td></tr><tr><td><p>Enter this security code to continue:</p></td></tr><tr><td style="font-size:32px;letter-spacing:4px"><b>550129</b></td></tr><tr><td><p>Copyright 2026 Example Inc. 123 Main St.</p></td></tr></table></body></html>

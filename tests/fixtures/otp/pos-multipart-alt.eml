@@ -1,0 +1,17 @@
+From: Example <no-reply@accounts.example.com>
+To: user@example.org
+Subject: Your Example code
+Date: Sun, 1 Nov 2026 10:00:00 +0000
+Message-ID: <pos-multipart-alt@fixtures.postmoth>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="b1"
+
+--b1
+Content-Type: text/plain; charset=utf-8
+
+Your one-time code: 301877
+--b1
+Content-Type: text/html; charset=utf-8
+
+<p>Your one-time code: <b>301877</b></p>
+--b1--

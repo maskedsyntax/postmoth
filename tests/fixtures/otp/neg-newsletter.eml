@@ -1,0 +1,11 @@
+From: News <news@example.com>
+To: user@example.org
+Subject: This week's verification tips
+Date: Sun, 1 Nov 2026 10:00:00 +0000
+Message-ID: <neg-newsletter@fixtures.postmoth>
+MIME-Version: 1.0
+List-Unsubscribe: <mailto:unsub@example.com>
+List-Id: <news.example.com>
+Content-Type: text/plain; charset=utf-8
+
+Our verification code tips this week: never share the 6-digit code 123456 used in our example.

@@ -1,0 +1,18 @@
+[package]
+name = "postmoth-mime"
+description = "Safe MIME parsing, text extraction and HTML sanitization for Postmoth"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+postmoth-core.workspace = true
+mail-parser.workspace = true
+ammonia.workspace = true
+thiserror.workspace = true
+
+[lints]
+workspace = true
