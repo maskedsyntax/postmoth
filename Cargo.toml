@@ -5,6 +5,7 @@ members = [
     "crates/postmoth-ipc",
     "crates/postmoth-otp",
     "crates/postmoth-mime",
+    "crates/postmoth-store",
 ]
 
 [workspace.package]
@@ -20,6 +21,7 @@ postmoth-core = { path = "crates/postmoth-core" }
 postmoth-ipc = { path = "crates/postmoth-ipc" }
 postmoth-otp = { path = "crates/postmoth-otp" }
 postmoth-mime = { path = "crates/postmoth-mime" }
+postmoth-store = { path = "crates/postmoth-store" }
 
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
@@ -35,6 +37,8 @@ tracing = "0.1"
 toml = "0.8"
 mail-parser = "1"
 ammonia = "4"
+rusqlite = { version = "0.41", features = ["bundled"] }
+tempfile = "3"
 
 [workspace.lints.rust]
 unsafe_code = "forbid"
