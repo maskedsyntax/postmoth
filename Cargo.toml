@@ -6,6 +6,7 @@ members = [
     "crates/postmoth-otp",
     "crates/postmoth-mime",
     "crates/postmoth-store",
+    "crates/postmoth-mail",
 ]
 
 [workspace.package]
@@ -15,6 +16,7 @@ rust-version = "1.88"
 license = "GPL-3.0-or-later"
 repository = "https://github.com/maskedsyntax/postmoth"
 authors = ["Aftaab Siddiqui <aftaab@aftaab.dev>"]
+publish = false
 
 [workspace.dependencies]
 postmoth-core = { path = "crates/postmoth-core" }
@@ -22,6 +24,7 @@ postmoth-ipc = { path = "crates/postmoth-ipc" }
 postmoth-otp = { path = "crates/postmoth-otp" }
 postmoth-mime = { path = "crates/postmoth-mime" }
 postmoth-store = { path = "crates/postmoth-store" }
+postmoth-mail = { path = "crates/postmoth-mail" }
 
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
@@ -39,6 +42,12 @@ mail-parser = "1"
 ammonia = "4"
 rusqlite = { version = "0.41", features = ["bundled"] }
 tempfile = "3"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "io-util", "sync"] }
+futures = "0.3"
+async-imap = { version = "0.12", default-features = false, features = ["runtime-tokio"] }
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+tokio-rustls = { version = "0.26", default-features = false, features = ["ring", "tls12", "logging"] }
+rustls-native-certs = "0.8"
 
 [workspace.lints.rust]
 unsafe_code = "forbid"
