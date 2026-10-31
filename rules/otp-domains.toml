@@ -1,0 +1,15 @@
+# Reviewed sender → login-origin catalog (spec §8.3).
+#
+# Every entry must be reviewed before merge. Rules:
+#   * `origins` are exact hosts; set `include_subdomains = true` only when the
+#     service genuinely logs in on many subdomains of a registrable domain.
+#   * Public suffixes (com, co.uk, github.io, ...) are rejected at load time.
+#   * `auth` defaults to "required": DMARC pass or aligned DKIM pass, as
+#     stamped by the user's own provider in Authentication-Results.
+#
+# Example (not active):
+# [[rule]]
+# senders = ["no-reply@accounts.example.com"]
+# origins = ["login.example.com"]
+# include_subdomains = false
+# auth = "required"

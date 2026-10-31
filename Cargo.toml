@@ -1,0 +1,47 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/postmoth-core",
+    "crates/postmoth-ipc",
+    "crates/postmoth-otp",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/maskedsyntax/postmoth"
+authors = ["Aftaab Siddiqui <aftaab@aftaab.dev>"]
+
+[workspace.dependencies]
+postmoth-core = { path = "crates/postmoth-core" }
+postmoth-ipc = { path = "crates/postmoth-ipc" }
+postmoth-otp = { path = "crates/postmoth-otp" }
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+uuid = { version = "1", features = ["v4", "serde"] }
+secrecy = "0.10"
+zeroize = "1"
+regex = "1"
+url = "2"
+idna = "1"
+psl = "2"
+tracing = "0.1"
+toml = "0.8"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_debug_implementations = "warn"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+dbg_macro = "warn"
+print_stdout = "warn"
+unwrap_used = "warn"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
