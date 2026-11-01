@@ -14,6 +14,8 @@ pub mod backoff;
 pub mod error;
 pub mod imap;
 pub mod sync;
+#[cfg(feature = "test-util")]
+pub mod testing;
 pub mod tls;
 
 pub use backoff::Backoff;

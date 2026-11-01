@@ -14,6 +14,8 @@ struct AccountConfig {
     smtp: ServerEndpoint,
     login: String,
     otp_enabled: bool,
+    #[serde(default)]
+    trusted_authserv_ids: Vec<String>,
 }
 
 pub(crate) fn enum_str<T: Serialize>(v: &T) -> Result<String> {
@@ -48,6 +50,7 @@ fn row_to_account(r: &Row<'_>) -> Result<Account> {
         login: config.login,
         auth_secret_ref: r.get(5)?,
         otp_enabled: config.otp_enabled,
+        trusted_authserv_ids: config.trusted_authserv_ids,
     })
 }
 
@@ -60,6 +63,7 @@ impl Store {
             smtp: a.smtp.clone(),
             login: a.login.clone(),
             otp_enabled: a.otp_enabled,
+            trusted_authserv_ids: a.trusted_authserv_ids.clone(),
         })?;
         self.conn.execute(
             "INSERT INTO accounts (id, provider_type, address, display_name, created_at, config_json, auth_secret_ref)
@@ -155,6 +159,7 @@ pub(crate) mod tests {
             login: "user@example.org".into(),
             auth_secret_ref: "postmoth:acct:1".into(),
             otp_enabled: true,
+            trusted_authserv_ids: vec!["mx.example.com".into()],
         }
     }
 

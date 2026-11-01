@@ -1,0 +1,6 @@
+# D-Bus activation: starting the UI or postmothctl starts the daemon
+# through systemd. Install to /usr/share/dbus-1/services/.
+[D-BUS Service]
+Name=dev.postmoth.Daemon1
+Exec=/bin/false
+SystemdService=postmoth-daemon.service

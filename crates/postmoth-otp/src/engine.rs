@@ -86,6 +86,12 @@ impl OtpEngine {
         self.cache.remove_account(account_id);
     }
 
+    /// Number of live candidates (diagnostics only; never the codes).
+    #[must_use]
+    pub fn live_candidates(&self) -> usize {
+        self.cache.len()
+    }
+
     pub fn clear(&mut self) {
         self.cache.clear();
     }

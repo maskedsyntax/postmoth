@@ -75,6 +75,8 @@ pub enum IdleOutcome {
     Changed,
     /// Timed out with nothing new; caller should re-IDLE or poll.
     Timeout,
+    /// The caller's interrupt fired.
+    Interrupted,
 }
 
 #[derive(Debug)]
@@ -250,12 +252,36 @@ impl<S: ImapStream> ImapConnection<S> {
     /// Wait for server push with IDLE, up to `max_wait` (capped at 29 min).
     /// Consumes and returns the connection because IDLE takes the session.
     pub async fn idle(self, max_wait: Duration) -> Result<(Self, IdleOutcome)> {
+        self.idle_until(max_wait, std::future::pending()).await
+    }
+
+    /// Like [`Self::idle`], but ends early (cleanly, with `DONE`) when
+    /// `interrupt` resolves, e.g. on "sync now", pause or shutdown.
+    pub async fn idle_until(
+        self,
+        max_wait: Duration,
+        interrupt: impl Future<Output = ()>,
+    ) -> Result<(Self, IdleOutcome)> {
         let caps = self.caps;
         let mut handle = self.session.idle();
         with_timeout(async { Ok(handle.init().await?) }).await?;
-        let (fut, _stop) = handle.wait_with_timeout(max_wait.min(IDLE_MAX));
-        let outcome = match fut.await? {
+        let mut interrupted = false;
+        let resp = {
+            let (fut, stop) = handle.wait_with_timeout(max_wait.min(IDLE_MAX));
+            let mut fut = std::pin::pin!(fut);
+            tokio::select! {
+                r = &mut fut => r?,
+                () = interrupt => {
+                    interrupted = true;
+                    // Dropping the stop source resolves the wait future.
+                    drop(stop);
+                    fut.await?
+                }
+            }
+        };
+        let outcome = match resp {
             IdleResponse::NewData(_) => IdleOutcome::Changed,
+            IdleResponse::ManualInterrupt if interrupted => IdleOutcome::Interrupted,
             IdleResponse::Timeout | IdleResponse::ManualInterrupt => IdleOutcome::Timeout,
         };
         let session = with_timeout(async { Ok(handle.done().await?) }).await?;

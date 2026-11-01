@@ -41,6 +41,11 @@ pub struct Account {
     /// Opaque key into the Secret Service; never the secret itself.
     pub auth_secret_ref: String,
     pub otp_enabled: bool,
+    /// `authserv-id`s of this account's own provider whose
+    /// `Authentication-Results` headers are believed (spec §8.6). Empty
+    /// means no results are trusted.
+    #[serde(default)]
+    pub trusted_authserv_ids: Vec<String>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]

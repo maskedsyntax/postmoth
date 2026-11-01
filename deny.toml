@@ -3,6 +3,15 @@ all-features = true
 
 [advisories]
 yanked = "deny"
+ignore = [
+    # zvariant / zvariant_derive / zbus_names were merged into zbus 6 and
+    # are flagged "unmaintained" (informational, no vulnerability). Every
+    # oo7 release, including 0.7 betas, still depends on zbus 5. Remove
+    # these once oo7 ships on zbus 6 and we upgrade both.
+    { id = "RUSTSEC-2026-0370", reason = "zvariant: merged into zbus 6; blocked on oo7" },
+    { id = "RUSTSEC-2026-0371", reason = "zbus_names: merged into zbus 6; blocked on oo7" },
+    { id = "RUSTSEC-2026-0372", reason = "zvariant_derive: merged into zbus 6; blocked on oo7" },
+]
 
 [licenses]
 # Must be compatible with GPL-3.0-or-later.
