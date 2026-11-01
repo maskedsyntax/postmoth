@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Self-focusing page</title>
+<script src="/common.js"></script></head>
+<body>
+  <form>
+    <label for="otp">Verification code</label>
+    <input id="otp" name="otp" autocomplete="one-time-code" inputmode="numeric" maxlength="6" autofocus>
+  </form>
+  <script>
+    // A page trying to trigger the suggestion without the user: focus and
+    // synthetic clicks, repeatedly. None of this carries user activation.
+    let n = 0;
+    const t = setInterval(() => {
+      const el = document.getElementById("otp");
+      el.blur(); el.focus(); el.click();
+      el.dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
+      if (++n === 5) clearInterval(t);
+    }, 150);
+  </script>
+</body></html>

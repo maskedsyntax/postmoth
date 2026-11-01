@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'">
+  <title>Postmoth</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>Postmoth</h1>
+  <p id="status" role="status" data-state="pending">Checking…</p>
+
+  <label class="row">
+    <input type="checkbox" id="pause">
+    <span>Pause code suggestions</span>
+  </label>
+
+  <section>
+    <h2>This site</h2>
+    <p id="site"></p>
+    <button type="button" id="site-toggle" hidden></button>
+  </section>
+
+  <section id="denied-section" hidden>
+    <h2>Never suggest on</h2>
+    <ul id="denied"></ul>
+  </section>
+
+  <p class="note">Codes are only offered on sites you or Postmoth's reviewed list
+    trust for the sender, and are filled only when you click <b>Fill</b>.</p>
+  <script src="popup.js"></script>
+</body>
+</html>

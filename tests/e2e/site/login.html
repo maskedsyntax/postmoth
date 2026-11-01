@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Sign in: verify</title>
+<script src="/common.js"></script></head>
+<body>
+  <h1>Two-step verification</h1>
+  <form id="f" action="/done" method="post">
+    <label for="otp">Enter the code we emailed you</label>
+    <input id="otp" name="otp" autocomplete="one-time-code" inputmode="numeric" maxlength="6">
+    <button type="submit">Verify</button>
+  </form>
+</body></html>

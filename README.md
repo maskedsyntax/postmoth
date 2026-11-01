@@ -18,6 +18,8 @@ Your mail, right at home on Linux.
 | `apps/daemon` | `postmoth-daemon` (systemd user service) |
 | `apps/cli` | `postmothctl` |
 | `apps/native-host` | `postmoth-native-host` (Chromium native messaging relay) |
+| `extensions/chromium` | MV3 browser extension (TypeScript) |
+| `tests/e2e` | Browser end-to-end test: GreenMail → daemon → host → extension |
 
 ## Development
 
@@ -34,6 +36,9 @@ one-time codes, passwords or message bodies; a test enforces this at TRACE.
 
 Browser bridge (dev): `scripts/dev-native-host.sh install` registers the debug
 host for Chrome, Chromium and Brave; see `packaging/native-messaging/`.
+
+Integration tests against a real IMAPS server: `scripts/greenmail.sh test`.
+Full browser end-to-end: `tests/e2e/run.sh` (Docker + Playwright Chromium).
 
 To run as a user service, copy `packaging/systemd/postmoth-daemon.service`
 to `~/.config/systemd/user/` (adjust `ExecStart`) and

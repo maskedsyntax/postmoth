@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Postmoth",
+  "version": "0.1.0",
+  "description": "Suggests one-time codes from your Postmoth mail on the sites they belong to.",
+  "minimum_chrome_version": "116",
+  "permissions": ["nativeMessaging", "storage", "activeTab"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": { "default_title": "Postmoth", "default_popup": "popup.html" },
+  "content_security_policy": {
+    "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self'"
+  }
+}

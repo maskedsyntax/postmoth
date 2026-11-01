@@ -25,6 +25,23 @@ jobs:
       - run: cargo clippy --workspace --all-targets
       - run: cargo test --workspace
 
+  extension:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: extensions/chromium
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: extensions/chromium/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
   deny:
     runs-on: ubuntu-24.04
     steps:

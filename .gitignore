@@ -26,3 +26,5 @@ rustc-ice-*.txt
 # Node / extension build output
 node_modules/
 extensions/*/dist/
+extensions/*/test-results/
+extensions/*/playwright-report/
