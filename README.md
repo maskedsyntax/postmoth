@@ -17,6 +17,7 @@ Your mail, right at home on Linux.
 | `crates/postmoth-platform` | XDG paths, Secret Service |
 | `apps/daemon` | `postmoth-daemon` (systemd user service) |
 | `apps/cli` | `postmothctl` |
+| `apps/native-host` | `postmoth-native-host` (Chromium native messaging relay) |
 
 ## Development
 
@@ -30,6 +31,9 @@ cargo run -p postmothctl -- trust @example.com https://login.example.com
 
 The daemon logs to stderr (`POSTMOTH_LOG=debug` for more). It never logs
 one-time codes, passwords or message bodies; a test enforces this at TRACE.
+
+Browser bridge (dev): `scripts/dev-native-host.sh install` registers the debug
+host for Chrome, Chromium and Brave; see `packaging/native-messaging/`.
 
 To run as a user service, copy `packaging/systemd/postmoth-daemon.service`
 to `~/.config/systemd/user/` (adjust `ExecStart`) and

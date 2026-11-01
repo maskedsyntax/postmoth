@@ -77,6 +77,23 @@ pub enum Op {
     },
 }
 
+/// `request_id`s are 1–64 chars of `[A-Za-z0-9_-]`; only valid ones are
+/// ever echoed back.
+#[must_use]
+pub fn is_valid_request_id(id: &str) -> bool {
+    !id.is_empty()
+        && id.len() <= MAX_REQUEST_ID_LEN
+        && id
+            .bytes()
+            .all(|b| b.is_ascii_alphanumeric() || b == b'-' || b == b'_')
+}
+
+/// The id to put in a reply: the caller's if valid, else empty.
+#[must_use]
+pub fn echo_request_id(id: &str) -> &str {
+    if is_valid_request_id(id) { id } else { "" }
+}
+
 impl Request {
     /// Structural validation independent of daemon state.
     pub fn validate(&self) -> Result<(), (ErrorCode, &'static str)> {
@@ -86,13 +103,7 @@ impl Request {
                 "unsupported protocol version",
             ));
         }
-        if self.request_id.is_empty()
-            || self.request_id.len() > MAX_REQUEST_ID_LEN
-            || !self
-                .request_id
-                .bytes()
-                .all(|b| b.is_ascii_alphanumeric() || b == b'-' || b == b'_')
-        {
+        if !is_valid_request_id(&self.request_id) {
             return Err((ErrorCode::BadRequest, "invalid request_id"));
         }
         match &self.op {

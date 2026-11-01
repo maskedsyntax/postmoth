@@ -7,7 +7,7 @@
 
 use crate::otp::OtpService;
 use postmoth_core::ErrorCode;
-use postmoth_ipc::browser::{Op, OtpCode, Request, Response, ResponseBody};
+use postmoth_ipc::browser::{Op, OtpCode, Request, Response, ResponseBody, echo_request_id};
 use postmoth_ipc::framing_async::{read_frame, write_json};
 use postmoth_platform::ensure_private_dir;
 use secrecy::ExposeSecret;
@@ -106,21 +106,12 @@ async fn handle_connection(stream: UnixStream, otp: &OtpService) -> io::Result<(
     }
 }
 
-fn echo_id(id: &str) -> &str {
-    let ok = !id.is_empty()
-        && id.len() <= postmoth_ipc::browser::MAX_REQUEST_ID_LEN
-        && id
-            .bytes()
-            .all(|b| b.is_ascii_alphanumeric() || b == b'-' || b == b'_');
-    if ok { id } else { "" }
-}
-
 /// Pure request handling, separated from I/O for testing.
 pub fn handle_request(otp: &OtpService, raw: &[u8]) -> Response {
     let Ok(req) = serde_json::from_slice::<Request>(raw) else {
         return Response::error("", ErrorCode::BadRequest, "malformed request");
     };
-    let rid = echo_id(&req.request_id).to_owned();
+    let rid = echo_request_id(&req.request_id).to_owned();
     if let Err((code, msg)) = req.validate() {
         return Response::error(rid, code, msg);
     }

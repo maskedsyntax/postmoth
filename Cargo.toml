@@ -10,6 +10,7 @@ members = [
     "crates/postmoth-platform",
     "apps/daemon",
     "apps/cli",
+    "apps/native-host",
 ]
 
 [workspace.package]

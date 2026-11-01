@@ -1,0 +1,7 @@
+{
+  "name": "dev.postmoth.native_host",
+  "description": "Postmoth one-time code suggestions",
+  "path": "@HOST_PATH@",
+  "type": "stdio",
+  "allowed_origins": [@ALLOWED_ORIGINS@]
+}

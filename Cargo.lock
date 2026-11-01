@@ -1460,6 +1460,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "postmoth-native-host"
+version = "0.1.0"
+dependencies = [
+ "postmoth-core",
+ "postmoth-ipc",
+ "serde_json",
+ "tempfile",
+]
+
+[[package]]
 name = "postmoth-otp"
 version = "0.1.0"
 dependencies = [
